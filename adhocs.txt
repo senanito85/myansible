@@ -1,0 +1,199 @@
+$ ansible webservers -i hosts -u sam -m yum -a "name=httpd state=present" -b
+$ ansible webservers -i hosts -u sam -m yum -a "name=httpd state=absent" -b
+
+# 1hh
+
+$ ansible webservers -u sam -m apt -a "name=httpd state=present" -b
+$ ansible webservers -m apt -a "name=nano state=absent" -b
+$ ansible webservers -m apt -a "name=nano state=present" -b
+
+
+  ansible all -m command -a "uptime"
+  ansible all -m command -a "hostname"
+  ansible all -m ping
+  ansible all -m setup
+
+ansible webservers -m copy -a "src=testfile.txt dest=/tmp/testfile.txt"
+
+ansible webservers -m file -a "dest=/tmp/testfile.txt state=absent"
+
+-----------------
+
+
+    1  history | grep snap
+    2  exit
+    3  reboot
+    4  docker pull docker.io/cloudstack/management_centos6
+    5  docker run --name cloudstack --link cloudstack-mysql:mysql -d -p 8080:8080 -p 8250:8250 docker.io/cloudstack/management_centos6
+    6  docker ps
+    7  ip a
+    8  ll
+    9  cd /tmp
+   10  ll
+   11  cd /root
+   12  ll
+   13  vi cloudstackscript.sh
+   14  bash cloudstackscript.sh
+   15  docker pull docker.io/mysql:5.5
+   16  docker run --name cloudstack-mysql -e MYSQL_ROOT_PASSWORD=password -d docker.io/mysql:5.5
+   17  pip install cloudmonkey
+   18  apt install python-pip
+   19  pip install cloudmonkey
+   20  cloudmonkey sync
+   21  cloudmonkey
+   22  set display table
+   23  cloudmonkey
+   24  cloudmonkey sync
+   25  vi ~/.cloudmonkey/config 
+   26  cloudmonkey
+   27  docker ps
+   28  docker container stop *
+   29  docker container stop #!/bin/bash
+   30  cli=cloudmonkey
+   31  dns_ext=8.8.8.8
+   32  dns_int=10.147.28.6
+   33  gw=10.147.28.1
+   34  nmask=255.255.255.0
+   35  hpvr=XenServer
+   36  pod_start=10.147.28.225
+   37  pod_end=10.147.28.234
+   38  vlan_start=10.147.28.235
+   39  vlan_end=10.147.28.254
+   40  #Put space separated host ips in following
+   41  host_ips=10.147.28.60
+   42  host_user=root
+   43  host_passwd=password
+   44  sec_storage=nfs://10.147.28.7/export/home/rohit/secondary
+   45  prm_storage=nfs://10.147.28.7/export/home/rohit/primary
+   46  zone_id=`$cli create zone dns1=$dns_ext internaldns1=$dns_int name=MyZone networktype=Basic | grep ^id\ = | awk '{print $3}'`
+   47  echo "Created zone" $zone_id
+   48  phy_id=`$cli create physicalnetwork name=phy-network zoneid=$zone_id | grep ^id\ = | awk '{print $3}'`
+   49  echo "Created physical network" $phy_id
+   50  $cli add traffictype traffictype=Guest physicalnetworkid=$phy_id
+   51  echo "Added guest traffic"
+   52  $cli add traffictype traffictype=Management physicalnetworkid=$phy_id
+   53  echo "Added mgmt traffic"
+   54  $cli update physicalnetwork state=Enabled id=$phy_id
+   55  echo "Enabled physicalnetwork"
+   56  nsp_id=`$cli list networkserviceproviders name=VirtualRouter physicalnetworkid=$phy_id | grep ^id\ = | awk '{print $3}'`
+   57  vre_id=`$cli list virtualrouterelements nspid=$nsp_id | grep ^id\ = | awk '{print $3}'`
+   58  $cli api configureVirtualRouterElement enabled=true id=$vre_id
+   59  $cli update networkserviceprovider state=Enabled id=$nsp_id
+   60  echo "Enabled virtual router element and network service provider"
+   61  nsp_sg_id=`$cli list networkserviceproviders name=SecurityGroupProvider physicalnetworkid=$phy_id | grep ^id\ = | awk '{print $3}'`
+   62  $cli update networkserviceprovider state=Enabled id=$nsp_sg_id
+   63  echo "Enabled security group provider"
+   64  netoff_id=`$cli list networkofferings name=DefaultSharedNetworkOfferingWithSGService | grep ^id\ = | awk '{print $3}'`
+   65  docker container ps
+   66  docker container stop c8fcdcf71d83
+   67  docker container stop a3b3d0be1453
+   68  docker container ps
+   69  docker ps
+   70  sudo add-apt-repository ppa:noobslab/apps
+   71  sudo apt-get update
+   72  sudo apt-get install xdman
+   73  xdman
+   74  sudo apt-get install xdman
+   75  sudo apt install persepolis
+   76  sudo add-apt-repository ppa:noobslab/apps
+   77  sudo apt install persepolis
+   78  sudo apt-get update
+   79  sudo add-apt-repository ppa:plushuang-tw/uget-stable
+   80  sudo apt-get install uget
+   81  uget
+   82  apt-get update
+   83  apt-get upgrade
+   84  history | grep ansible
+   85  cat /etc/hosts
+   86  ansible --version
+   87  vi /etc/ansible/ansible.cfg
+   88  vi /etc/ansible/hosts
+   89  cat /etc/hosts
+   90  vi /etc/hosts
+   91  cat /etc/hosts
+   92  ping other1.example.com
+   93  ping other2.example.com
+   94  vi /etc/hosts
+   95  ssh other1
+   96  ssh sam@other1
+   97  ssh sam@other2
+   98  ssh-copy-id sam@other1
+   99  ssh-keygen
+  100  ssh-copy-id sam@other1
+  101  ssh-copy-id sam@other2
+  102  ssh-copy-id sam@other1
+  103  ssh sam@other2
+  104  ssh sam@other
+  105  ssh sam@other1
+  106  vi /etc/ansible/hosts
+  107  ansible webserver -m shell -a 'echo $TERM'
+  108  ansible webservers -m shell -a 'echo $TERM'
+  109  ansible webservers -m shell -a 'hostname'
+  110  y
+  111  ansible webservers -m shell -a 'hostname'
+  112  ansible webservers -m shell -a 'date'
+  113  ll
+  114  mkdir ansible
+  115  cd ansible/
+  116  ll
+  117  debug-playbook.yml
+  118  vi debug-playbook.yml
+  119  ansible-playbook debug-playbook.yml 
+  120  vi fix-playbook.yml
+  121  ansible-playbook fix-playbook.yml 
+  122  vi fix-playbook.yml
+  123  vi fix-simlink-playbook.yml
+  124  ansible-playbook fix-simlink-playbook.yml
+  125  vi fix-simlink-playbook.yml
+  126  ansible-playbook fix-simlink-playbook.yml
+  127  vi fix-simlink-playbook.yml
+  128  ansible-playbook fix-simlink-playbook.yml
+  129  vi fix-playbook.yml
+  130  ansible-playbook fix-simlink-playbook.yml
+  131  vi fix-simlink-playbook.yml
+  132  ansible-playbook fix-simlink-playbook.yml
+  133  vi fix-simlink-playbook.yml
+  134  ll
+  135  ansible webservers -m command -a "uptime"
+  136  ansible webservers -m ping
+  137  ansible webservers -m setup
+  138  ansible localhost -m setup
+  139  cat /etc/ansible/hosts
+  140  vi fix-simlink-playbook.yml
+  141  cat /etc/ansible/hosts
+  142  vi /etc/ansible/hosts
+  143  ansible webservers -m command -a "uptime"
+  144  vi /etc/ansible/hosts
+  145  ansible webservers -m command -a "uptime"
+  146  ansible webservers -m shell -a 'hostname'
+  147  vi /etc/ansible/hosts
+  148  vi /etc/hosts
+  149  ssh-copy-id sam@other3.example.com
+  150  ansible all -m command -a "uptime"
+  151  ansible all -m command -a "hostname"
+  152  ansible all -m ping
+  153  ansible all -m setup
+  154  vi fix-simlink-playbook.yml
+  155  ansible-playbook debug-playbook.yml 
+  156  ll
+  157  vi adhocs.txt
+  158  ansible webservers -m apt -a "name picoo state=present" -b
+  159  ansible webservers -m apt -a "name=pico state=present" -b
+  160  ansible webservers -m apt -a "name=nano state=present" -b
+  161  ansible webservers -m apt -a "name=nano state=absent" -b
+  162  ansible webservers -m apt -a "name=nano state=present" -b
+  163  history 20
+  164  vi testfile.txt
+  165  ansible webservers -m copy -a "src=testfile.txt dst=/tmp/testfile.txt"
+  166  ansible webservers -m copy -a "src=testfile.txt dest=/tmp/testfile.txt"
+  167  ansible all -m command -a "cat /tmp/testfile.txt"
+  168  ansible webservers -m file -a "dest=/tmp/testfile.txt state=absent"
+  169  ll
+  170  cp /etc/ansible/hosts .
+  171  ll
+  172  cat hosts 
+  173  touch nginx-playbook.yml
+  174  history
+
+
+
